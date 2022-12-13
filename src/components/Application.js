@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 
 import "components/Application.scss";
 import DayList from "./DayList";
-import InterviewerList from "./InterviewerList";
+
 export default function Application(props) {
+
+  const [day, setDay] = useState("Monday")
 
   const days = [
     {
@@ -22,14 +24,6 @@ export default function Application(props) {
       spots: 0,
     },
   ];
-
-  const interviewers = [
-    { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
-    { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
-    { id: 3, name: "Mildred Nazir", avatar: "https://i.imgur.com/T2WwVfS.png" },
-    { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
-    { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
-  ];
   
   return (
     <main className="layout">
@@ -43,8 +37,8 @@ export default function Application(props) {
       <nav className="sidebar__menu">
         <DayList
           days={days}
-          day={"Monday"}
-          setDay={day => console.log(day)}
+          value={day}
+          onChange={setDay}
         />
       </nav>
       <img
@@ -54,10 +48,7 @@ export default function Application(props) {
       />
       </section>
       <section className="schedule">
-        <InterviewerList
-          interviewers={interviewers}
-          interviewer={interviewer.name}
-        />
+        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
       </section>
       
     </main>
