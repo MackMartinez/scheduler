@@ -46,7 +46,6 @@ const appointments = {
 
 const AppointmentList = Object.values(appointments).map((appointment) => {
   return (
-
     <Appointment 
       key={appointment.id}
       {...appointment}
