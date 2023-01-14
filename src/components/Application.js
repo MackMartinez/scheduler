@@ -17,11 +17,26 @@ export default function Application(props) {
     interviewers: {},
   });
   
+  // Setting the scheduel component dynamically
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
   
+  // Rendering schedule
   const AppointmentList = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
+
+  const bookInterview = (id, interview) => {
+    console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState({...state,appointments});
+  }
 
     return <Appointment 
       key={appointment.id}
@@ -29,6 +44,7 @@ export default function Application(props) {
       time={appointment.time}
       interview={interview}
       interviewers={interviewers}
+      bookInterview={bookInterview}
        />;
   });
   
