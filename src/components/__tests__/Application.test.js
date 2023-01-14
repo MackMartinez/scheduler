@@ -8,6 +8,8 @@ import { renderHook, act } from "@testing-library/react-hooks";
 
 import useVisualMode from "hooks/useVisualMode";
 
+import mockAxios from "__mocks__/axios";
+
 afterEach(cleanup);
 
 it("renders without crashing", () => {

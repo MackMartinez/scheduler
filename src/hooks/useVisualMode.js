@@ -19,7 +19,7 @@ const useVisualMode = (initial) => {
     setMode(newMode);
   }
 
-   // Back
+   // Backs
   const back = () => {
     if (history.length > 1) {
       history.pop()
