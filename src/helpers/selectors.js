@@ -41,3 +41,18 @@ export function getInterview(state, interview) {
   return result;
 }
 
+export function getInterviewersForDay(state, day) {
+  //... returns an array of appointments for that day
+  const [selectedDay] = state.days.filter((item) => item.name === day);
+  if (!selectedDay) return [];
+
+  const { interviewers: selectedDayInterviewers } = selectedDay;
+
+  const interviewersArray = Object.values(state.interviewers);
+
+  const interviewersForDay = interviewersArray.filter((item) =>
+    selectedDayInterviewers.includes(item.id)
+  );
+  
+  return interviewersForDay;
+}
