@@ -25,8 +25,8 @@ export default function Application(props) {
   const AppointmentList = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
-  const bookInterview = (id, interview) => {
-    console.log(id, interview);
+  // function to book function and put req to server
+  const bookInterview = async (id, interview) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -35,8 +35,27 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    setState({...state,appointments});
-  }
+    
+    return Axios
+      .put(`/api/appointments/${id}`, {...appointment})
+      .then(setState({...state,appointments}));
+  };
+
+  //function to cancel interview
+    const cancelInterview = async (id) => {
+      const appointment = {
+        ...state.appointments[id],
+        interview: null,
+      };
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+
+      return Axios
+        .delete(`/api/appointments/${id}`, {...appointment})
+        .then(setState({...state, appointments}));
+    };
 
     return <Appointment 
       key={appointment.id}
@@ -45,6 +64,7 @@ export default function Application(props) {
       interview={interview}
       interviewers={interviewers}
       bookInterview={bookInterview}
+      cancelInterview={cancelInterview}
        />;
   });
   
