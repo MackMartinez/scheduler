@@ -38,7 +38,7 @@ export default function Application(props) {
     
     return Axios
       .put(`/api/appointments/${id}`, {...appointment})
-      .then(setState({...state,appointments}));
+      .then(() => setState({...state,appointments}));
   };
 
   //function to cancel interview
@@ -54,7 +54,7 @@ export default function Application(props) {
 
       return Axios
         .delete(`/api/appointments/${id}`, {...appointment})
-        .then(setState({...state, appointments}));
+        .then(() => setState({...state, appointments}));
     };
 
     return <Appointment 
