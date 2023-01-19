@@ -11,22 +11,6 @@ const useApplicationData = () => {
 
   const setDay = (day) => setState({ ...state, day });
 
-  // function to book function and put req to server
-  const bookInterview = async (id, interview) => {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview },
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
-
-    return axios
-      .put(`/api/appointments/${id}`, { ...appointment })
-      .then(() => setState({ ...state, appointments }));
-  };
-
   //getting state data from api-server
   useEffect(() => {
     Promise.all([
@@ -43,6 +27,41 @@ const useApplicationData = () => {
     });
   }, []);
 
+  //function to update spots available
+  const updateSpots = (state, appointments, id) => {
+    const interviewStatePrev = state.appointments[id].interview;
+    const interviewStatePost = appointments[id].interview;
+
+    //handle value of current spot amount change
+    let spotsChange = 0;
+
+    // Count for just updating an appointment
+    if (interviewStatePrev !== null && interviewStatePost !== null) {
+      spotsChange = 0;
+    }
+
+    // Count for deleting an appointment
+    else if (interviewStatePrev !== null && interviewStatePost === null) {
+      spotsChange = 1;
+    }
+
+    // Count for creating an appointment
+    else if (interviewStatePrev === null && interviewStatePost !== null) {
+      spotsChange = -1;
+    }
+
+    const updatedDays = state.days.map((day) => {
+      // Find the day where the appointments array includes the ID
+      if (day.appointments.includes(id)) {
+        // Update the spots value with the appropriate spotsChange
+        return { ...day, spots: day.spots + spotsChange };
+      }
+      return day;
+    });
+
+    return updatedDays;
+  };
+
   //function to cancel interview
   const cancelInterview = async (id) => {
     const appointment = {
@@ -56,7 +75,29 @@ const useApplicationData = () => {
 
     return axios
       .delete(`/api/appointments/${id}`, { ...appointment })
-      .then(() => setState({ ...state, appointments }));
+      .then(() => {
+        const days = updateSpots(state, appointments, id);
+        setState({ ...state, days, appointments })
+      });
+  };
+
+  // function to book function and put req to server
+  const bookInterview = async (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    return axios
+      .put(`/api/appointments/${id}`, { ...appointment })
+      .then(() => {
+        const days = updateSpots(state, appointments, id);
+        setState({ ...state, days, appointments })
+      });
   };
 
   return {
