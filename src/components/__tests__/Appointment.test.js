@@ -9,6 +9,9 @@ describe('Appointment', () => {
     const { getByText } = render(<Application />);
     expect(getByText("5pm")).toBeInTheDocument()
   }); 
+
+  
+
 });
 
 
