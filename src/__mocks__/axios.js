@@ -1,5 +1,3 @@
-// import mockAxios from "jest-mock-axios";
-
 const fixtures = {
   days: [
     {
