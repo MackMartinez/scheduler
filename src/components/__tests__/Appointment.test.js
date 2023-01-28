@@ -10,8 +10,6 @@ describe('Appointment', () => {
     expect(getByText("5pm")).toBeInTheDocument()
   }); 
 
-  
-
 });
 
 
