@@ -6,7 +6,7 @@ describe("interaction with appointment component", () => {
   
     cy.contains("Monday");
    });
-   
+
   it("Should book an interview", () => {
 
     cy.get("[alt=Add]").first().click();
@@ -21,7 +21,18 @@ describe("interaction with appointment component", () => {
     cy.contains(".appointment__card--show", "Sylvia Palmer");
   });
 
-  it("Should edit an interview", () => {});
+  it("Should edit an interview", () => {
+
+    cy.get("[alt=Edit]").first().click({ force: true });
+
+    cy.get("[data-testid=student-name-input]").clear().type("Tori Malcolm");
+
+    cy.contains("Save").click();
+
+    cy.contains(".appointment__card--show", "Tori Malcolm");
+    cy.contains(".appointment__card--show", "Sylvia Palmer");
+
+  });
 
   it("Should cancel an interview", () => {});
 });
