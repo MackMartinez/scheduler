@@ -12,6 +12,15 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 
 Install dependencies with `npm install`.
 
+### Dependencies
+
+axios, alassnames, jest-mock-axios, react, react-dom, react-scripts, normalize.css
+
+### Scheduler-api Server
+
+Fork and clone the scheduler-api server ["here"](https://github.com/lighthouse-labs/scheduler-api)
+Follow the read me at the link to get the api server running before running the project server.
+
 ## Running Webpack Development Server
 
 ```sh
