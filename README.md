@@ -8,7 +8,11 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 
 !["creating Interview"](https://github.com/MackMartinez/scheduler/blob/master/Gifs/ezgif.com-gif-maker.gif)
 
+### Deleting an interview
+
 !["deleting Interview"](https://github.com/MackMartinez/scheduler/blob/master/Gifs/delete-interview.gif)
+
+### Editing an interview
 
 !["editing Interview"](https://github.com/MackMartinez/scheduler/blob/master/Gifs/edit-interview.gif)
 
