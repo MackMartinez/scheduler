@@ -35,7 +35,7 @@ const Appointment = (props) => {
 
     props
       .bookInterview(props.id, interview)
-      .then(() => transition(SHOW, true))
+      .then(() => transition(SHOW))
       .catch((error) => transition(ERROR_SAVE, true));
       
   };
@@ -45,7 +45,7 @@ const Appointment = (props) => {
     transition(DELETE, true); 
     props
       .cancelInterview(props.id)
-      .then(() => transition(EMPTY))
+      .then(() => transition(EMPTY),true)
       .catch((error) => transition(ERROR_DELETE,true));
   }
 

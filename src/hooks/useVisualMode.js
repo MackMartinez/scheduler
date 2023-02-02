@@ -8,22 +8,22 @@ const useVisualMode = (initial) => {
   const [ history, setHistory ] = useState([initial])
 
   // Transition from initial mode to intended mode
-  function transition (newMode, replace = false) {
+  const transition = (newMode, replace = false) => {
 
-    setHistory(prev => {
-      if (replace) {
-        return [...prev.slice(0, prev.length - 1), newMode];
-      }
-      return [...prev,newMode]
-    })
-    setMode(newMode);
-  }
+      setHistory((prev) => [newMode, ...prev.slice(replace ? 1 : 0)]);
+      setMode(newMode);
+      console.log("newMode:", newMode)
+    }
 
-   // Backs
+   // sets mode back to previous state
   const back = () => {
     if (history.length > 1) {
-      history.pop()
-      setMode(history.slice(-1)[0]);
+      console.log("history:", history)
+      const newHistory = [...history].pop()
+      
+      setMode(newHistory);
+      console.log("newhistory:", newHistory)
+      return newHistory;
     }
   }
 
