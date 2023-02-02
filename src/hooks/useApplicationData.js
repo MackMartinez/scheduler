@@ -11,7 +11,6 @@ const useApplicationData = () => {
 
   const setDay = (day) => setState({ ...state, day });
 
-  //getting state data from api-server
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -32,7 +31,6 @@ const useApplicationData = () => {
     const interviewStatePrev = state.appointments[id].interview;
     const interviewStatePost = appointments[id].interview;
 
-    //handle value of current spot amount change
     let spotsChange = 0;
 
     // Count for just updating an appointment
@@ -62,7 +60,6 @@ const useApplicationData = () => {
     return updatedDays;
   };
 
-  //function to cancel interview
   const cancelInterview = async (id) => {
     const appointment = {
       ...state.appointments[id],
