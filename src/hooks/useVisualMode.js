@@ -18,11 +18,10 @@ const useVisualMode = (initial) => {
    // sets mode back to previous state
   const back = () => {
     if (history.length > 1) {
-      console.log("history:", history)
+      
       const newHistory = [...history].pop()
       
       setMode(newHistory);
-      console.log("newhistory:", newHistory)
       return newHistory;
     }
   }
