@@ -24,14 +24,13 @@ const Appointment = (props) => {
     props.interview ? SHOW : EMPTY
   );
 
-  // to save selected interview
   const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer,
     };
 
-    transition(SAVING, true);
+    transition(SAVING);
 
     props
       .bookInterview(props.id, interview)
@@ -39,7 +38,6 @@ const Appointment = (props) => {
       .catch((error) => transition(ERROR_SAVE, true));
   };
 
-  //cancel interview and transition to empty component
   const cancel = (event) => {
     transition(DELETE, true);
     props
