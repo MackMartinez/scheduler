@@ -69,7 +69,5 @@ export function getInterviewersForDay(state, day) {
   const interviewersForDay = interviewersArray.filter((item) =>
     selectedDayInterviewers.includes(item.id)
   );
-  console.log("state", state)
-  console.log("interviewersforday", interviewersForDay)
   return interviewersForDay;
 }
