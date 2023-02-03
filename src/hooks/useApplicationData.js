@@ -26,33 +26,28 @@ const useApplicationData = () => {
     });
   }, []);
 
-  //function to update spots available
   const updateSpots = (state, appointments, id) => {
     const interviewStatePrev = state.appointments[id].interview;
     const interviewStatePost = appointments[id].interview;
 
     let spotsChange = 0;
 
-    // Count for just updating an appointment
-    if (interviewStatePrev !== null && interviewStatePost !== null) {
-      spotsChange = 0;
-    }
-
-    // Count for deleting an appointment
-    else if (interviewStatePrev !== null && interviewStatePost === null) {
+    // Changes available spots when deleting an interview
+    if (interviewStatePrev !== null && interviewStatePost === null) {
       spotsChange = 1;
     }
 
-    // Count for creating an appointment
-    else if (interviewStatePrev === null && interviewStatePost !== null) {
+    // Changes available spots when creating an interview
+    if (interviewStatePrev === null && interviewStatePost !== null) {
       spotsChange = -1;
     }
 
     const updatedDays = state.days.map((day) => {
-      // Find the day where the appointments array includes the ID
       if (day.appointments.includes(id)) {
-        // Update the spots value with the appropriate spotsChange
-        return { ...day, spots: day.spots + spotsChange };
+        return { 
+          ...day, 
+          spots: day.spots + spotsChange
+        };
       }
       return day;
     });
@@ -78,7 +73,6 @@ const useApplicationData = () => {
       });
   };
 
-  // function to book function and put req to server
   const bookInterview = async (id, interview) => {
     const appointment = {
       ...state.appointments[id],
